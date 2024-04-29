@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webAssembly webWorker experiments</title>
+    <link rel="preload" as="fetch" href="factorial.wasm" />
+  </head>
+  <body>
+    <form>
+      <label>The factorial of <input type="text" value="12" /></label> is
+      <output>479001600</output>.
+      <div>
+        <button id="CPP" type="submit">Calculate c++</button>
+        <button id="JS" type="submit">Calculate js</button>
+      </div>
+    </form>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
