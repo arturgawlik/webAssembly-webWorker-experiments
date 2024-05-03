@@ -13,7 +13,7 @@ WebAssembly.instantiateStreaming(fetch("factorial.wasm"), importObject).then(
       self.postMessage({ result });
 
       // remove listner
-      self.removeEventListener(onMessage);
+      self.removeEventListener("message", onMessage);
     }
   }
 );
