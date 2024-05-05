@@ -4,6 +4,8 @@ const buttonCPP = document.querySelector("button#CPP");
 
 let worker = null;
 let start = null;
+const wasmModulePromise = WebAssembly.compileStreaming(fetch("factorial.wasm"));
+
 buttonCPP.addEventListener("click", async () => {
   start = performance.now();
 
@@ -12,10 +14,12 @@ buttonCPP.addEventListener("click", async () => {
     worker.addEventListener("error", (e) => {
       console.error(e);
     });
-    const wasmModule = await WebAssembly.compileStreaming(
-      fetch("factorial.wasm")
-    );
-    worker.postMessage({ type: "wasmModule", wasmModule });
+
+    const wasmModule = await wasmModulePromise;
+    worker.postMessage({
+      type: "wasmModule",
+      wasmModule,
+    });
     worker.addEventListener("message", onMessage);
 
     function onMessage(e) {
